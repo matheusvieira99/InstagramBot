@@ -1,2 +1,4 @@
+import getpass
+
 username = input("Inform your username: ")
-password = input("Inform your password: ")
+password = getpass.getpass('Inform your password: ')
