@@ -14,6 +14,7 @@ eggs/
 Lib/
 lib64/
 parts/
+__pycache__/
 sdist/
 var/
 *.egg-info/
@@ -46,8 +47,6 @@ coverage.xml
 *.log
 *.pot
 
-#PowerShell
-.Activate
 
 # Sphinx documentation
 docs/_build/
