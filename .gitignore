@@ -47,7 +47,7 @@ coverage.xml
 *.pot
 
 #PowerShell
-.Activate.ps1
+.Activate
 
 # Sphinx documentation
 docs/_build/
