@@ -24,7 +24,12 @@ class InstaBot:
         # self.driver.find_element_by_xpath("//button[contains(text(), 'Agora não')]")\
         #     .click()
         # sleep(2)
+    
+    def get_unfollowers(self):
+        self.driver.find_element_by_xpath("//a[contains(@href,'/{}')]".format(username))\
+        .click()
         
 
     
-InstaBot(username, password)
+bot = InstaBot(username, password)
+bot.get_unfollowers()
