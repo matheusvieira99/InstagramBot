@@ -14,7 +14,16 @@ class InstaBot:
             .send_keys(password)
         self.driver.find_element_by_xpath('//button[@type="submit"]')\
             .click()
-        sleep(1000)
+        sleep(4)
+        self.driver.find_element_by_xpath("//button[contains(text(), 'Agora não')]")\
+            .click()
+        sleep(2)
+        self.driver.find_element_by_xpath("//button[contains(text(), 'Agora não')]")\
+            .click()
+        sleep(2)
+        # self.driver.find_element_by_xpath("//button[contains(text(), 'Agora não')]")\
+        #     .click()
+        # sleep(2)
         
 
     
