@@ -31,12 +31,22 @@ class InstaBot:
         sleep(2)
         self.driver.find_element_by_xpath("//a[contains(@href,'/following')]")\
             .click()
+        following = self._get_names_following()
+        self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]")\
+            .click()
+        followers = self._get_names_followers()
+        not_following_back = [user for user in following if user not in followers]
+        print(not_following_back)
+        
+    def _get_names_following(self):
         sleep(2)
         # sugs = self.driver.find_element_by_xpath("//h4[contains(text(), )]");
+        scroll_box = self.driver.find_element_by_xpath('/html/body/div[6]/div/div/div[3]')
         self.driver.execute_script('window.scrollBy(0,1000)')
         sleep(3)
         # print("im here")
-        scroll_box = self.driver.find_element_by_xpath("/html/body/div[6]/div/div/div[3]")
+        # scroll_box = self.driver.find_element_by_xpath('/html/body/div[6]/div/div/div[2]')
+        #'/html/body/div[6]/div/div/div[2]'
         last_ht, ht = 0, 1
         while last_ht != ht:
             last_ht = ht
@@ -46,8 +56,36 @@ class InstaBot:
             return arguments[0].scrollHeight;
             """, scroll_box)
         links = scroll_box.find_elements_by_tag_name('a')
-        
+        names = [name.text for name in links if name != '']
+        self.driver.find_element_by_xpath("/html/body/div[6]/div/div/div[1]/div/div[2]/button")\
+            .click()
+        return names
+        # print(names)
+    def _get_names_followers(self):
+        sleep(2)
+        # sugs = self.driver.find_element_by_xpath("//h4[contains(text(), )]");
+        scroll_box = self.driver.find_element_by_xpath('/html/body/div[6]/div/div/div[2]')
+        self.driver.execute_script('window.scrollBy(0,1000)')
+        sleep(3)
+        # print("im here")
+        # scroll_box = self.driver.find_element_by_xpath('/html/body/div[6]/div/div/div[2]')
+        #'/html/body/div[6]/div/div/div[2]'
+        last_ht, ht = 0, 1
+        while last_ht != ht:
+            last_ht = ht
+            sleep(1)
+            ht = self.driver.execute_script("""
+            arguments[0].scrollTo(0, arguments[0].scrollHeight);
+            return arguments[0].scrollHeight;
+            """, scroll_box)
+        links = scroll_box.find_elements_by_tag_name('a')
+        names = [name.text for name in links if name != '']
+        self.driver.find_element_by_xpath("/html/body/div[6]/div/div/div[1]/div/div[2]/button")\
+            .click()
+        return names
 
     
 bot = InstaBot(username, password)
 bot.get_unfollowers()
+bot._get_names_following()
+bot._get_names_followers()
