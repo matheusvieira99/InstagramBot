@@ -43,20 +43,21 @@ class InstaBot:
         # sugs = self.driver.find_element_by_xpath("//h4[contains(text(), )]");
         scroll_box = self.driver.find_element_by_xpath('/html/body/div[6]/div/div/div[3]')
         self.driver.execute_script('window.scrollBy(0,1000)')
-        sleep(3)
+        sleep(2)
         # print("im here")
         # scroll_box = self.driver.find_element_by_xpath('/html/body/div[6]/div/div/div[2]')
         #'/html/body/div[6]/div/div/div[2]'
         last_ht, ht = 0, 1
         while last_ht != ht:
             last_ht = ht
-            sleep(1)
+            sleep(3)
             ht = self.driver.execute_script("""
             arguments[0].scrollTo(0, arguments[0].scrollHeight);
             return arguments[0].scrollHeight;
             """, scroll_box)
         links = scroll_box.find_elements_by_tag_name('a')
         names = [name.text for name in links if name != '']
+        sleep(3)
         self.driver.find_element_by_xpath("/html/body/div[6]/div/div/div[1]/div/div[2]/button")\
             .click()
         return names
@@ -66,7 +67,7 @@ class InstaBot:
         # sugs = self.driver.find_element_by_xpath("//h4[contains(text(), )]");
         scroll_box = self.driver.find_element_by_xpath('/html/body/div[6]/div/div/div[2]')
         self.driver.execute_script('window.scrollBy(0,1000)')
-        sleep(3)
+        sleep(1)
         # print("im here")
         # scroll_box = self.driver.find_element_by_xpath('/html/body/div[6]/div/div/div[2]')
         #'/html/body/div[6]/div/div/div[2]'
