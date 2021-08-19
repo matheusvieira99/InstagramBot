@@ -27,7 +27,25 @@ class InstaBot:
     
     def get_unfollowers(self):
         self.driver.find_element_by_xpath("//a[contains(@href,'/{}')]".format(username))\
-        .click()
+            .click()
+        sleep(2)
+        self.driver.find_element_by_xpath("//a[contains(@href,'/following')]")\
+            .click()
+        sleep(2)
+        # sugs = self.driver.find_element_by_xpath("//h4[contains(text(), )]");
+        self.driver.execute_script('window.scrollBy(0,1000)')
+        sleep(3)
+        # print("im here")
+        scroll_box = self.driver.find_element_by_xpath("/html/body/div[6]/div/div/div[3]")
+        last_ht, ht = 0, 1
+        while last_ht != ht:
+            last_ht = ht
+            sleep(1)
+            ht = self.driver.execute_script("""
+            arguments[0].scrollTo(0, arguments[0].scrollHeight);
+            return arguments[0].scrollHeight;
+            """, scroll_box)
+        links = scroll_box.find_elements_by_tag_name('a')
         
 
     
